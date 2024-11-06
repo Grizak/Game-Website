@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title %></title>
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+	<header>
+		<h1><%= title %></h1>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/games">Games</a></li>
+				<li><a href="/auth/signup">Signup</a></li>
+				<li><a href="/auth/signin">Signin</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<main>
+		<%- body %>
+	</main>
+
+	<footer>
+		<p>&copy; 2024 - <%= new Date().getFullYear() %> Isak Grönlund</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<h3>We have sent a message to <strong><%= email %></strong></h3>
+
+<script>
+  const email = document.getElementByName('strong').textcontent;
+  // Function to check verification status
+  async function checkVerificationStatus() {
+    try {
+      const response = await fetch(`/api/auth/check-verification?email=${email}`);
+      const data = await response.json();
+
+      if (data.isVerified) {
+        // Redirect the user to the login page when verified
+        window.location.href = "/login";
+      } else {
+        // Continue checking every 5 seconds if not verified yet
+        setTimeout(checkVerificationStatus, 5000);
+      }
+    } catch (error) {
+      console.error("Error checking verification status:", error);
+    }
+  }
+
+  // Start polling for verification status
+  checkVerificationStatus();
+</script>

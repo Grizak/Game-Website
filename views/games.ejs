@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/css/games.css">
+
+<% if (games.length > 0) { %>
+  <ul class="game">
+    <% games.forEach(game => { %>
+      <li>
+        <h4><%= game.name %></h4>
+        <p><%= game.description %></p>
+        <a href="<%= game.url %>">Play Now</a>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No games found.</p>
+<% } %>

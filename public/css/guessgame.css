@@ -1,0 +1,9 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#feedback {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
