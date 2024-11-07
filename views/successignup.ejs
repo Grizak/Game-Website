@@ -10,7 +10,7 @@
 
       if (data.isVerified) {
         // Redirect the user to the login page when verified
-        window.location.href = "/login";
+        window.location.href = "/auth/login";
       } else {
         // Continue checking every 5 seconds if not verified yet
         setTimeout(checkVerificationStatus, 5000);

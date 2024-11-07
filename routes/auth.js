@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 router.post("/signup", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Validate the request
     const errors = validationResult(req);
@@ -42,7 +42,7 @@ router.post("/signup", async (req, res) => {
 
     // Create a new user with isVerified set to false
     const user = new User({
-      username,
+      name,
       email,
       password: hashedPassword,
       verificationToken,
@@ -68,7 +68,7 @@ router.post("/signup", async (req, res) => {
       email: user.email,
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
@@ -92,7 +92,7 @@ router.get("/verify-email", async (req, res) => {
     await user.save();
 
     // Redirect to a "verified" page or login page after verification
-    res.redirect("/login"); // Adjust this route as needed
+    res.redirect("/auth/signin"); // Adjust this route as needed
   } catch (error) {
     console.error(error);
     res.status(500).render("error", {
@@ -145,10 +145,15 @@ router.post("/signin", async (req, res) => {
       expiresIn: "1h", // Token expires in 1 hour
     });
 
-    // Return the JWT token in the response
-    res.json({ token });
+    const isVerified = user.isVerified;
+
+    if (!isVerified) {
+      res.status();
+    }
+
+    res.status(200).render("index", { title: "Home", token });
   } catch (err) {
-    console.error("An unexprecteed error occured", err);
+    console.error("An unexprecteed error occured: ", err);
   }
 });
 

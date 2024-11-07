@@ -14,6 +14,9 @@ app.use(ejsLayouts);
 app.set("layout", "layouts/layout");
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 mongoose
   .connect(process.env.CONNECTIONSTRING)
   .then(() => console.log("Connected to MongoDB"))
@@ -47,6 +50,7 @@ app.get("/guessgame", (req, res) => {
 app.use("/clickergame", require("./routes/clickergameroutes"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/auth", require("./routes/authGET"));
+app.use("/api", require("./routes/api"));
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

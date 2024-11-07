@@ -1,20 +1,20 @@
-<h2>Clicker Game</h2>
+    <h2>Clicker Game</h2>
 
-<p>You got <strong id="currency"></strong> Coins</p>
+    <p>You got <strong id="currency"></strong> Coins</p>
 
-<button id="clickMeButton">Click Me</button>
+    <button id="clickMeButton">Click Me</button>
 
-<p>You have clicked <strong id="clickCount"></strong> times</p>
+    <p>You have clicked <strong id="clickCount"></strong> times</p>
 
-<h3>Available upgrades</h3>
-<ul>
-  <% for (let upgrade in <%= upgrades %>) { %>
-    <li>
-      <p><%= upgrade.name %></p>
-      <p><%= upgrade.cost %></p>
-      <button onclick="">Purchache</button>
-    </li>
-  <% } %>
-</ul>
+    <h3>Available upgrades</h3>
+    <ul>
+      <% for (let upgrade of upgrades) { %>
+        <li>
+          <p><%= upgrade.name %></p>
+          <p>Cost: <%= upgrade.cost %> coins</p>
+          <button onclick="purchaseUpgrade('<%= upgrade.name %>')">Purchase</button>
+        </li>
+      <% } %>
+    </ul>
 
-<script src="/js/clickergame.js"></script>
+    <script src="/js/clickergame.js"></script>

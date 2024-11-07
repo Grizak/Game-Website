@@ -1,4 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
+const clickerSchema = new mongoose.Schema({
+  clicks: {
+    type: Number,
+    default: 0,
+  },
+  currency: {
+    type: Number,
+    default: 0,
+  },
+  upgrades: {
+    type: Array,
+    default: [],
+  },
+  cps: {
+    type: Number,
+    default: 0,
+  },
+});
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,8 +35,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user',
+    enum: ["user", "admin"],
+    default: "user",
   },
   isVerified: {
     type: Boolean,
@@ -26,8 +45,9 @@ const userSchema = new mongoose.Schema({
   verificationToken: {
     type: String,
   },
+  clickerGame: clickerSchema,
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

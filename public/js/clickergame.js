@@ -1,15 +1,24 @@
-const Upgrades = require("../models/Upgrades");
-
 let clicks = 0;
 let currency = 0;
 let clickmultiplier = 1;
 let cps = 0;
+let boughtUpgrades = [];
+
+let Upgrades = [];
+
+function fetchupgrades() {
+  Upgrades = [];
+  fetch("/api/upgrades")
+    .then((res) => res.json())
+    .then((data) => {
+      Upgrades = data;
+    });
+}
 
 const clickMeButton = document.getElementById("clickMeButton");
 const currencyDisplay = document.getElementById("currency");
 const clickCount = document.getElementById("clickCount");
 
-const upgrades = document.getElementById("uprades").value;
 function click() {
   clicks += clickmultiplier;
   currency += clickmultiplier;
@@ -20,6 +29,12 @@ function click() {
 
 function purchache(upgradeName) {
   const upgrade = Upgrades.findByName({ upgradeName });
+  if (currency >= upgrade.price) {
+    return;
+  }
+
+  currency -= upgrade.price;
+  boughtUpgrades.push(upgrade);
 }
 
 clickMeButton.addEventListener("click", function () {
